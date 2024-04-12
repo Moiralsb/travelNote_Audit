@@ -1,0 +1,98 @@
+  /* 审核卡片样式 */
+  .auditcardCard {
+    border: 1px solid blue;
+    border-radius: 10px;
+    margin: 4px 0;
+    padding: 5px;
+  }
+
+  .auditcardbox {
+    display: flex;
+    /* border: 1px solid blue; */
+    border-radius: 10px;
+    margin: 4px 0;
+    padding: 5px;
+  }
+
+  .auditcardleft {
+    flex-basis: 80%;
+    display: flex;
+    border: 1px solid blue;
+    border-radius: 10px;
+    /* height: 100vh; */
+    padding: 10px;
+  }
+
+  .auditcardright {
+    flex-basis: 20%;
+    border: 1px solid blue;
+    border-radius: 10px;
+    /* height: 100vh; */
+    padding: 10px;
+  }
+
+  .imageshow {
+    width: 100px; /* 设置图片宽度 */
+    height: 100px; /* 设置图片高度 */
+    border-radius: 20px;
+    object-fit: cover; /* 保持图片比例，同时填充容器 */
+    margin: 2px;
+  }
+
+.traveltitleshow {
+    overflow: hidden;  /* 隐藏溢出的文本 */
+    text-overflow: ellipsis; /*当文本超出容器边界时，显示省略号 (...)*/
+    /* white-space: nowrap; */
+}
+
+  .travelcontentshow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .auditstatus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid blue;
+    border-radius: 50%;
+    height: 50px;
+    
+  }
+
+  .auditbuttonshow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid blue; */
+    border-radius: 10px;
+    height: 50px;
+    margin: 5px;
+    padding: 5px;
+  }
+
+  .auditbutton {
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+
+  /* 内容悬浮样式 */
+  .textcontainer {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .tooltip {
+    position: absolute;
+    /* position: relative; */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    /* 其他样式 */
+  }

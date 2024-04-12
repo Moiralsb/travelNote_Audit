@@ -1,0 +1,7 @@
+.carousel {
+    width: 200px; /* 设置图片宽度 */
+    height: 200px; /* 设置图片高度 */
+    border-radius: 20px;
+    object-fit: cover; /* 保持图片比例，同时填充容器 */
+    margin: 2px;
+}

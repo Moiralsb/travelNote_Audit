@@ -1,0 +1,19 @@
+.homecontainer {
+    display: flex;
+}
+
+.left {
+    flex-basis: 15%;
+    border: 1px solid blue;
+    border-radius: 10px;
+    /* height: 100vh; */
+    padding: 10px;
+  }
+
+  .right {
+    flex-basis: 85%;
+    border: 1px solid blue;
+    border-radius: 10px;
+    margin: 0 5px;
+    padding: 10px;
+  }
