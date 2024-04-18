@@ -29,6 +29,7 @@ export default function AuditCard({ Data, auditSymRole }) {
             console.log(passedPostSym);
             if (passedPostSym) {
                 alert("审核通过");
+                window.location.reload();
             } else {
                 alert("审核失败");
             }
@@ -54,6 +55,7 @@ export default function AuditCard({ Data, auditSymRole }) {
                 console.log(rejectedPostSym);
                 if (rejectedPostSym) {
                     alert("审核拒绝通过");
+                    window.location.reload();
                 } else {
                     alert("审核拒绝失败");
                 }
@@ -71,6 +73,7 @@ export default function AuditCard({ Data, auditSymRole }) {
             console.log(deletedPostSym);
             if (deletedPostSym) {
                 alert("逻辑删除成功");
+                window.location.reload();
             } else {
                 alert("逻辑删除失败");
             }

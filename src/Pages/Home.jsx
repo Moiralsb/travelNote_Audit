@@ -3,8 +3,13 @@ import './home.css';
 import styles from './home.module.css';
 import AuditCard from '../components/AuditCard';
 import Carousel from '../components/Carousel';
-import { fetchPostsSym } from '../api/fetchPosts';
 import useUserSym from '../components/useUserSym';
+import { fetchPostsSym } from '../api/fetchPosts';
+import { fetchPassPostsSym } from '../api/fetchPassPostsSym';
+import { fetchRejectPostsSym } from '../api/fetchRejectPostsSym';
+import { fetchDeletePostsSym } from '../api/fetchDeletePostsSym';
+import {fetchNotexaminPostsSym} from '../api/fetchNotexaminPostsSym'
+import {searchTripsSym} from '../api/searchTripsSym';
 
 const images = [
     'https://img2.baidu.com/it/u=2539872750,2513176690&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500',
@@ -24,6 +29,7 @@ const images = [
 export default function Home() {
 
     const [travelnotes, setTravelnotes] = useState([]);
+    const [query, setQuery] = useState('');
     const [filter, setFilter] = useState('');
     const { userSym, loading } = useUserSym();
 
@@ -45,23 +51,49 @@ export default function Home() {
         window.location.href = '/login';
     };
 
-    const handleFilterChange = (event) => {
+    // 搜索
+    function handleChange(e) {
+        setQuery(e.target.value);
+    };
+
+    async function handleSearch(query) {
+        const searchedTrips = await searchTripsSym(query);
+        setTravelnotes(searchedTrips);
+        alert('搜索中……');
+    };
+
+    // 筛选
+    const handleFilterChange = async (event) => {
         const selectedValue = event.target.value;
         setFilter(selectedValue); // 更新状态以触发筛选
         if (selectedValue === '') {
-            //onFilterChange(selectedValue); // 发送请求到后端进行筛选
+            // 发送请求到后端进行筛选-全部
+            const selectedAllSym = await fetchPostsSym();
+            setTravelnotes(selectedAllSym);
             alert('筛选个der');
         }
+        if (selectedValue === 'notexamined') {
+            // 发送请求到后端进行筛选-未审核
+            const selectedNotexaminSym = await fetchNotexaminPostsSym();
+            setTravelnotes(selectedNotexaminSym);
+            alert('筛选未审核的');
+        }
         if (selectedValue === 'approved') {
-            //onFilterChange(selectedValue); // 发送请求到后端进行筛选
+            // 发送请求到后端进行筛选-通过
+            const selectedPassSym = await fetchPassPostsSym();
+            setTravelnotes(selectedPassSym);
             alert('筛选通过的');
         }
         if (selectedValue === 'rejected') {
-            //onFilterChange(selectedValue); // 发送请求到后端进行筛选
+            // 发送请求到后端进行筛选-拒绝
+            const selectedRejectSym = await fetchRejectPostsSym();
+            setTravelnotes(selectedRejectSym);
             alert('筛选拒绝的');
         }
         if (selectedValue === 'deleted') {
-            //onFilterChange(selectedValue); // 发送请求到后端进行筛选
+            // 发送请求到后端进行筛选-逻辑删除
+            const selectedDeleteSym = await fetchDeletePostsSym();
+            setTravelnotes(selectedDeleteSym);
             alert('筛选删除的');
         }
     };
@@ -84,14 +116,20 @@ export default function Home() {
                 </div>
                 <div className='right'>
                     <div className={styles.container}>
-                        {/* <div className={styles.searcharea}>
-                            <input type="text" placeholder="搜索" />
-                            <button>搜索</button>
-                        </div> */}
+                        <div className={styles.searcharea}>
+                            <input
+                                type="text"
+                                placeholder="搜索"
+                                value={query}
+                                onChange={handleChange}
+                            />
+                            <button onClick={() => handleSearch(query)}>搜索</button>
+                        </div>
                         <div className={styles.filterarea}>
                             <label>筛选：</label>
                             <select value={filter} onChange={handleFilterChange}>
                                 <option value="">全部</option>
+                                <option value="notexamined">未审核</option>
                                 <option value="approved">通过</option>
                                 <option value="rejected">拒绝</option>
                                 {userSym?.auditSymRole === 1 && (<option value="deleted">删除</option>
